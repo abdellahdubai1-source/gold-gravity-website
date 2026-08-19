@@ -57,8 +57,21 @@
     right: 0;
   }
 
+  /* Content is visible by default (server-rendered, no-JS, or before
+     hydration) — the reveal-on-scroll animation is progressive
+     enhancement only. Reveal.tsx adds `.armed` on an element only once
+     it has actually mounted on the client and confirmed
+     IntersectionObserver is available; only then does the element
+     briefly go to opacity:0 pending its scroll-triggered `.in-view`
+     animation. If JS never runs, hydration fails, or the browser lacks
+     IntersectionObserver, `.armed` is never added and opacity stays at
+     its default 1 — content can never get stuck invisible. */
   .reveal {
+    opacity: 1;
+  }
+  .reveal.armed:not(.in-view) {
     opacity: 0;
+    transform: translateY(24px);
   }
   .reveal.in-view {
     animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
