@@ -106,7 +106,24 @@ const categories = [
 // ---------------------------------------------------------------------
 // BRANDS  (categories referenced by slug, resolved after insert)
 // ---------------------------------------------------------------------
-const brands = [
+type SeedBrand = {
+  slug: string;
+  name: string;
+  brand_line_en: string;
+  brand_line_ar: string;
+  description_en: string;
+  description_ar: string;
+  logo_url: string | null;
+  hero_image_url: string;
+  country_of_origin: string;
+  display_order: number;
+  seo_title_en: string;
+  seo_title_ar: string;
+  seo_description_en: string;
+  categorySlugs: string[];
+};
+
+const brands: SeedBrand[] = [
   {
     slug: "waves",
     name: "WAVES",
@@ -136,7 +153,7 @@ const brands = [
       "تقدّم PRIME كريمات غنية وقوامها ناعم — كريمة الفستق، وكريمة الفستق مع الكنافة والبندق، وكريمة البندق المقرمشة بالكاكاو — مثالية للحلويات والمعجنات والفطور والاستخدام اليومي.",
     logo_url: "/images/logos/prime-logo-reference.png",
     hero_image_url: "/images/products/prime/prime-pistachio-kunafa-hazelnut-200g.jpeg",
-    country_of_origin: null,
+    country_of_origin: "—",
     display_order: 2,
     seo_title_en: "PRIME Spreads UAE | Pistachio & Hazelnut Cream",
     seo_title_ar: "كريمات برايم | فستق وبندق",
