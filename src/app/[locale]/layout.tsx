@@ -6,6 +6,7 @@ import "../globals.css";
 import { locales, dir, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
 import { getSiteSettings, FALLBACK_SETTINGS } from "@/lib/data/queries";
+import { getSiteUrl } from "@/lib/site-url";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -42,7 +43,7 @@ export async function generateMetadata({
     params.locale === "ar"
       ? settings.default_seo_description_ar
       : settings.default_seo_description_en;
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://goldgravityuae.com";
+  const siteUrl = getSiteUrl();
 
   return {
     metadataBase: new URL(siteUrl),
@@ -88,7 +89,7 @@ export default async function LocaleLayout({
   const { locale } = params;
   const settings = (await getSiteSettings()) ?? FALLBACK_SETTINGS;
   const logoUrl = settings.logo_url ?? "/images/logos/gold-gravity-logo.jpeg";
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://goldgravityuae.com";
+  const siteUrl = getSiteUrl();
 
   const organizationJsonLd = {
     "@context": "https://schema.org",

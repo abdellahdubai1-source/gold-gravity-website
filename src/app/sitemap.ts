@@ -1,8 +1,7 @@
 import type { MetadataRoute } from "next";
 import { locales } from "@/i18n/config";
 import { getCategories, getBrands, getProducts } from "@/lib/data/queries";
-
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://goldgravityuae.com";
+import { getSiteUrl } from "@/lib/site-url";
 
 const staticPaths = [
   "",
@@ -17,6 +16,7 @@ const staticPaths = [
 ];
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const siteUrl = getSiteUrl();
   const [categories, brands, products] = await Promise.all([
     getCategories(),
     getBrands(),

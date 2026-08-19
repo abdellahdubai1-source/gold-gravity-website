@@ -15,6 +15,7 @@ import { Button } from "@/components/ui/Button";
 import { ProductGallery } from "@/components/product/ProductGallery";
 import { ProductCard } from "@/components/product/ProductCard";
 import { localized, buildWhatsAppLink, productWhatsAppMessage, cn } from "@/lib/utils";
+import { getSiteUrl } from "@/lib/site-url";
 
 export const dynamic = "force-dynamic";
 
@@ -112,7 +113,7 @@ export default async function ProductDetailPage({
       "@type": "Offer",
       availability: "https://schema.org/InStock",
       priceSpecification: undefined,
-      url: `${process.env.NEXT_PUBLIC_SITE_URL ?? "https://goldgravityuae.com"}/${locale}/products/${product.slug}`,
+      url: `${getSiteUrl()}/${locale}/products/${product.slug}`,
     },
   };
 
