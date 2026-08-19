@@ -1,5 +1,5 @@
 import "server-only";
-import { createClient } from "@/lib/supabase/server";
+import { createPublicClient as createClient } from "@/lib/supabase/public";
 import type {
   Brand,
   BrandWithCategories,
@@ -11,7 +11,12 @@ import type {
 } from "@/types/database";
 
 /**
- * Every function here fails soft: if Supabase isn't configured yet
+ * Every function here reads published/public content only, so it uses
+ * the cookie-free public client — calling cookies()/headers() here
+ * would force every route that renders this data (including the
+ * homepage and /sitemap.xml) into dynamic-only rendering.
+ *
+ * Every function here also fails soft: if Supabase isn't configured yet
  * (e.g. during local scaffolding before `.env.local` is filled in) or
  * a request errors, we log and return an empty/null result instead of
  * throwing — so the site renders its empty states instead of a 500.
