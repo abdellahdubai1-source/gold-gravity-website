@@ -1,0 +1,97 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-warmwhite text-charcoal antialiased;
+    font-feature-settings: "kern" 1, "liga" 1;
+  }
+
+  [dir="rtl"] body {
+    font-family: var(--font-tajawal), system-ui, sans-serif;
+  }
+
+  ::selection {
+    @apply bg-champagne/30 text-charcoal;
+  }
+
+  :focus-visible {
+    outline: 2px solid theme("colors.champagne.DEFAULT");
+    outline-offset: 2px;
+  }
+}
+
+@layer utilities {
+  .container-px {
+    @apply px-5 sm:px-8 lg:px-12;
+  }
+
+  .section-y {
+    @apply py-16 sm:py-20 lg:py-28;
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .gold-underline {
+    position: relative;
+  }
+  .gold-underline::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -0.5rem;
+    height: 3px;
+    width: 3rem;
+    background: linear-gradient(90deg, theme("colors.champagne.DEFAULT"), theme("colors.champagne.light"));
+    border-radius: 999px;
+  }
+  [dir="rtl"] .gold-underline::after {
+    left: auto;
+    right: 0;
+  }
+
+  .reveal {
+    opacity: 0;
+  }
+  .reveal.in-view {
+    animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .skeleton {
+    @apply relative overflow-hidden bg-beige;
+    background-image: linear-gradient(
+      90deg,
+      theme("colors.beige.DEFAULT") 0%,
+      theme("colors.beige.dark") 50%,
+      theme("colors.beige.DEFAULT") 100%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.8s linear infinite;
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
